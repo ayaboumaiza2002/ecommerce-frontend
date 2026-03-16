@@ -1,0 +1,6 @@
+{
+  "root": "dist/front-ecome/browser",
+  "routes": {
+    "/**": "index.html"
+  }
+}
