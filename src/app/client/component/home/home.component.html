@@ -1,0 +1,186 @@
+<nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+    <div class="container">
+        <a class="navbar-brand" href="">
+            ROYELLA<span>brand</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsFurni">
+            <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/client">Home</a>
+                </li>
+                <li>
+                    <a class="nav-link" [routerLink]="['/shop']">Shop</a>
+                </li>
+                <li><a class="nav-link" [routerLink]="['/about']">About us</a></li>
+                <li><a class="nav-link" routerLink="/contact">Contact us</a></li>
+            </ul>
+
+            <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link cart-container" routerLink="/cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Your beauty deserves the best version of you</h1>
+                    <p class="mb-4">Shop the newest styles</p>
+                    <p class="text-center">
+                        <a [routerLink]="['/shop']" class="btn-shop-now">Shop Now</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-7"></div>
+        </div>
+    </div>
+</div>
+
+<div class="categories-section-wrapper position-relative">
+    <button class="hero-style-arrow arrow-left" (click)="prevCategory()" aria-label="Previous category">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M15 18L9 12L15 6"></path>
+        </svg>
+    </button>
+
+    <button class="hero-style-arrow arrow-right" (click)="nextCategory()" aria-label="Next category">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 18L15 12L9 6"></path>
+        </svg>
+    </button>
+
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="section-main-title">Discover Our Collections</h2>
+            <p class="section-subtitle mt-3">Elegance crafted for every moment</p>
+        </div>
+
+        <div class="row g-5 justify-content-center" style="transition: all 0.5s ease;">
+                    <div *ngFor="let cat of visibleCategories" class="col-12 col-md-6 col-lg-5 animate-fade">
+                <a [routerLink]="['/category', cat.toLowerCase()]" 
+                class="category-card" 
+                [style.background-image]="'url(' + getCategoryImg(cat) + ')'"
+                [style.background-size]="'cover'"
+                [style.background-position]="'center'">
+                    
+                    <div class="category-content">
+                        <h3 class="category-title">{{ cat }}</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <p class="text-center">
+                <a [routerLink]="['/shop']" class="btn-shop-now">Shop All Collections</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<section class="discover-brand-fullbg position-relative">
+    <div class="brand-bg-image"></div>
+    <div class="brand-overlay"></div>
+    <div class="container position-relative">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-9 col-xl-8">
+                <div class="brand-text-box">
+                    <h2 class="brand-title">Discover Our Brand</h2>
+                    <div class="brand-text">
+                        ROYELLA is more than a brand — it’s a celebration of timeless elegance, refined taste, and effortless femininity.<br>
+                        Every piece is meticulously crafted for the modern woman who seeks perfection in every detail: premium fabrics, flawless tailoring, couture finishes, and understated luxury.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="new-collection" class="nouveautes-slider">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="section-main-title fw-bold display-4">New Arrivals</h2>
+            <p class="text-muted fs-5">The latest exclusive pieces</p>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-5 justify-content-center">
+            <div class="col" *ngFor="let prod of newProducts; let i = index">
+                <a class="nouv-card-bg d-block text-decoration-none text-center text-dark">
+                    <div class="nouv-img" 
+                         [style.background-image]="'url(' + getImgUrl(prod.imageUrls) + ')'">
+                         <span *ngIf="i < 3" class="badge bg-danger position-absolute m-2">NEW</span>
+                    </div>
+                    <h3 class="nouv-title mt-4">{{ prod.nom }}</h3>
+                    <p class="collection-price">{{ prod.prix }} DZ</p>
+                    <span class="shop-now-btn mt-3" [routerLink]="['/product', prod.id]">SHOP NOW →</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer-section">
+    <div class="container relative">
+        <div class="row g-5 mb-5">
+            <div class="col-lg-4">
+                <div class="mb-4 footer-logo-wrap">
+                    <a href="#" class="footer-logo">ROYELLA</a>
+                </div>
+                <p class="mb-4">
+                    Made for women who like style without trying too hard. 
+                    Simple shapes, high-quality fabrics, and small details that make a big impression.
+                </p>
+                <ul class="list-unstyled custom-social">
+                    <li><a href="https://www.instagram.com/royella_brand" target="_blank"><span class="fa fa-brands fa-instagram"></span></a></li>
+                    <li><a href="https://www.tiktok.com/@royella_brand" target="_blank"><span class="fa fa-brands fa-tiktok"></span></a></li>
+                    <li><a href="https://www.facebook.com/61574069080577/" target="_blank"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-sm-6 col-md-3">
+                <h5 class="text-black mb-4">Shop</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#new-collection">New Collection</a></li>
+                    <li *ngFor="let cat of categories">
+                        <a [routerLink]="['/category', cat.toLowerCase()]">{{ cat }}s</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-sm-6 col-md-2">
+                <h5 class="text-black mb-4">Contact</h5>
+                <ul class="list-unstyled">
+                    <li>Algeria</li>
+                    <li>WhatsApp: 0557 15 07 76</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-top copyright">
+            <div class="row pt-4">
+                <div class="col-lg-12 text-center">
+                    <p class="mb-2">
+                        © 2026 ROYELLA — All Rights Reserved | Created by 
+                        <a href="https://www.instagram.com/ayooya_zynona" target="_blank" style="text-decoration: none; color: #000; font-weight: bold;">
+                            A.B
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,73 @@
+<div *ngIf="!produit" class="text-center py-5">
+    <div class="spinner-border text-secondary" role="status"></div>
+    <p class="mt-2 text-muted">Loading product details...</p>
+</div>
+
+<div class="product-container" *ngIf="produit">
+  <div class="product-layout">
+    
+    <div class="product-info-top">
+      <nav class="breadcrumb">
+        <span [routerLink]="['/shop']" style="cursor:pointer">Shop</span> / <span>{{ produit.nom }}</span>
+      </nav>
+      <h1 class="product-title">{{ produit.nom }}</h1>
+      <div class="product-price">
+        <ng-container *ngIf="produit.prixPromo && produit.prixPromo > 0; else regularPrice">
+          <span class="text-muted text-decoration-line-through me-2">{{ produit.prix }} DZ</span>
+          <span class="text-danger fw-bold" style="font-size: 1.5rem;">{{ produit.prixPromo }} DZ</span>
+        </ng-container>
+        <ng-template #regularPrice>
+          <span class="fw-bold" style="font-size: 1.5rem;">{{ produit.prix }} DZ</span>
+        </ng-template>
+      </div>
+      <p class="product-description">{{ produit.description }}</p>
+      <hr class="separator">
+    </div>
+
+    <div class="product-image-section">
+      <div class="category-tag">{{ produit.categorie | uppercase }}</div>
+      <img [src]="mainImageUrl" alt="Product Image" class="main-img" onerror="this.src='assets/images/placeholder.jpg'">
+      <div class="thumbnail-gallery" *ngIf="produit.imageUrls && produit.imageUrls.length > 1">
+        <img *ngFor="let img of produit.imageUrls" 
+             [src]="backendUrl + img" 
+             (click)="updateMainImage(img)"
+             [class.active]="mainImageUrl === (backendUrl + img)"
+             class="thumb-img">
+      </div>
+    </div>
+
+    <div class="product-actions-bottom">
+      <div class="selection-group">
+        <label class="fw-bold">SELECT SIZE</label>
+        <div class="options-grid">
+          <button type="button" *ngFor="let size of produit.tailleDisponible" [class.active]="selectedSize === size" (click)="selectedSize = size">{{ size }}</button>
+        </div>
+      </div>
+
+      <div class="selection-group mt-3">
+        <label class="fw-bold">SELECT COLOR</label>
+        <div class="options-grid">
+          <button type="button" *ngFor="let color of produit.couleurDisponible" [class.active]="selectedColor === color" (click)="selectedColor = color">{{ color }}</button>
+        </div>
+      </div>
+
+      <div class="selection-group mt-3">
+        <label class="fw-bold">QUANTITY</label>
+        <div class="quantity-control">
+          <button type="button" (click)="changeQty(-1)">-</button>
+          <span>{{ quantity }}</span>
+          <button type="button" (click)="changeQty(1)">+</button>
+        </div>
+      </div>
+
+      <div class="buttons-group mt-4">
+        <button type="button" class="btn-black-capsule" (click)="confirmOrder()">CONFIRM ORDER & SHOP NOW →</button>
+        <button type="button" class="btn-outline-capsule mt-2" (click)="addToCart()">ADD TO CART <i class="fas fa-shopping-bag ms-2"></i></button>
+      </div>
+
+      <div class="stock-status in-stock mt-3" *ngIf="produit.quantiteStock >= 10"><span class="dot"></span> In Stock</div>
+      <div class="stock-status low-stock mt-3" *ngIf="produit.quantiteStock > 0 && produit.quantiteStock < 10"><span class="dot"></span> Limited Stock - Order Soon!</div>
+      <div class="stock-status out-of-stock mt-3" *ngIf="produit.quantiteStock <= 0"><span class="dot"></span> Out of Stock</div>
+    </div>
+  </div>
+</div>

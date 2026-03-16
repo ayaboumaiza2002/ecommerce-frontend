@@ -1,0 +1,93 @@
+<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+  <div class="container">
+    <a class="navbar-brand" href="">
+      ROYELLA<span>brand</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsFurni">
+      <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/client">Home</a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/shop']">Shop</a>
+        </li>
+        <li><a class="nav-link" [routerLink]="['/about']">About us</a></li>
+        <li><a class="nav-link" routerLink="/contact">Contact us</a></li>
+      </ul>
+
+      <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link cart-container text-black" routerLink="/cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container py-5 mt-5">
+  <h2 class="section-title mb-5 text-center">My Shopping Bag</h2>
+
+  <div class="row g-4" *ngIf="items.length > 0; else emptyCart">
+    <div class="col-lg-8">
+      <div class="cart-item-card mb-3 p-3 border rounded shadow-sm" *ngFor="let item of items; let i = index">
+        <div class="d-flex align-items-center">
+          
+          <img [src]="getImgUrl(item.produit.imageUrls)" 
+               width="75" 
+               height="95" 
+               class="rounded object-fit-cover border shadow-sm" 
+               onerror="this.src='assets/images/placeholder.jpg'">
+
+          <div class="ms-4 flex-grow-1">
+            <h5 class="fw-bold mb-1">{{ item.produit.nom }}</h5>
+            <p class="text-muted small mb-1">Size: <b>{{ item.taille }}</b> | Color: <b>{{ item.couleur }}</b></p>
+            <p class="mb-0">{{ getPrice(item) }} DZ x {{ item.quantite }}</p>
+          </div>
+          
+          <div class="text-end">
+            <p class="fw-bold mb-2 text-dark">{{ item.sousTotal }} DZ</p>
+            <button class="btn btn-sm btn-outline-danger border-0" (click)="remove(i)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="summary-box p-4 bg-light border rounded shadow-sm">
+        <h4 class="mb-4 fw-bold">Order Summary</h4>
+        <div class="d-flex justify-content-between mb-2">
+          <span>Items:</span> <span>{{ items.length }}</span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between mb-4">
+          <span class="h5 fw-bold">Total:</span> <span class="h5 fw-bold text-success">{{ total }} DZ</span>
+        </div>
+        <button class="btn btn-dark w-100 py-3 rounded-pill fw-bold shadow-sm" routerLink="/checkout">
+          PROCEED TO COMMANDER
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <div class="text-center py-5">
+      <i class="fa fa-shopping-bag fa-4x text-light mb-3"></i>
+      <h3>Your bag is empty</h3>
+      <p class="text-muted">Looks like you haven't added anything yet.</p>
+      <a routerLink="/shop" class="btn btn-dark px-5 py-2 mt-3 rounded-pill">GO TO SHOP</a>
+    </div>
+  </ng-template>
+</div>

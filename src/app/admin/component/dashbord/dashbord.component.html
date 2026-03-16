@@ -1,0 +1,158 @@
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <header class="header">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle" (click)="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="search" placeholder="Search...">
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn" (click)="openMessages()">
+          <i class="fas fa-bell"></i>
+          <span class="notification-dot" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="content-header">
+        <h1>Dashboard Overview</h1>
+        <p>Welcome back! Here's what's happening today.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-content">
+            <div class="stat-text">
+              <p class="stat-label">Total Revenue</p>
+              <h3 class="stat-value">{{ totalRevenue | currency:'DZD ':'symbol':'1.0-0' }}</h3>
+            </div>
+            <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-content">
+            <div class="stat-text">
+              <p class="stat-label">Orders</p>
+              <h3 class="stat-value">{{ totalCommandes }}</h3>
+            </div>
+            <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-content">
+            <div class="stat-text">
+              <p class="stat-label">Customers</p>
+              <h3 class="stat-value">{{ totalCustomers }}</h3>
+            </div>
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-content">
+            <div class="stat-text">
+              <p class="stat-label">Products</p>
+              <h3 class="stat-value">{{ totalProduct }}</h3>
+            </div>
+            <div class="stat-icon"><i class="fas fa-box"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="best-sellers-container">
+        <div class="best-sellers-header">
+          <i class="fas fa-trophy" style="color: #000000;"></i> Top 3 Products
+        </div>
+        <div class="best-sellers-grid">
+          <div class="best-seller-card" *ngFor="let prod of bestSellingProducts; let i = index">
+            <div class="rank">{{ i + 1 }}</div>
+            <h4 class="value">{{ prod.nom }}</h4>
+            <p class="label">{{ prod.sales }} sales</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="charts-container">
+        <div class="chart-card">
+          <h3><i class="fas fa-chart-pie"></i> Commandes par statut</h3>
+          <div class="chart-wrapper">
+            <canvas #statusChart></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3><i class="fas fa-map-marker-alt"></i> Top Wilayas</h3>
+          <div class="chart-wrapper">
+            <canvas #wilayaChart></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="card-header">
+          <h3>Pending Orders</h3>
+        </div>
+        <div class="card-content">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of pendingOrders">
+                <td>{{ order.id }}</td>
+                <td>{{ order.client?.nom }} {{ order.client?.prenom }}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let item of order.items">{{ item.produit?.nom }}</li>
+                  </ul>
+                </td>
+                <td>{{ order.total | currency:'DZD ':'symbol':'1.0-0' }}</td>
+                <td>
+                  <span class="status-badge">{{ order.etat }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  <router-outlet></router-outlet>
+
+  <div class="messages-modal-overlay" *ngIf="showMessagesModal" (click)="closeMessages()">
+    <div class="messages-modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Customer Messages</h3>
+        <button class="close-btn" (click)="closeMessages()">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div *ngIf="messages.length === 0" class="no-messages">
+          <p>No new messages.</p>
+        </div>
+
+        <div *ngFor="let msg of messages" class="msg-item" [class.unread-item]="!msg.read">
+          <div class="msg-info">
+            <strong>{{ msg.fullName }}</strong>
+            <small>{{ msg.createdAt | date:'short' }}</small>
+          </div>
+          <p class="msg-text">{{ msg.message }}</p>
+          <div class="msg-actions">
+             <span class="email-text">{{ msg.email }}</span>
+             <button *ngIf="!msg.read" (click)="markAsRead(msg.id)" class="mark-btn">Mark as read</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

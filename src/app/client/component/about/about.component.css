@@ -1,0 +1,516 @@
+/*
+* Template Name: UntreeStore
+* Template Author: Untree.co
+* Author URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/
+
+body {
+overflow-x: hidden !important;
+  width: 100%;
+  margin: 0;
+  padding: 0;}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  color: #6a6a6a;
+  font-size: 14px;
+  background-color: #eff2f1;
+ width: 100vw;  }
+ .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+a {
+  text-decoration: none;
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+  color: #2f2f2f;
+  text-decoration: underline; }
+  a:hover {
+    color: #2f2f2f;
+    text-decoration: none; }
+  a.more {
+    font-weight: 600; }
+
+.custom-navbar {
+   position: fixed !important;
+  top: 0; left: 0; width: 100%;
+  z-index: 9999 !important;
+background: rgba(255, 255, 255, 0.25) !important; /* شفافية أقل = blur يبان */
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+
+  transition: all 0.4s ease;
+}
+  
+/* ==== LOGO ROYELLA brand ==== */
+.custom-navbar .navbar-brand {
+  font-size: 36px !important;
+  font-weight: 800 !important;
+  color: #000000 !important;           /* أسود غامق */
+  text-decoration: none;
+  letter-spacing: -1px;
+}
+
+.custom-navbar .navbar-brand span {
+  font-weight: 500 !important;         /* خفيفة بزاف */
+  font-size: 20px !important;          /* حجم أصغر */
+  opacity: 0.6 !important;
+  color: #000000 !important;
+  letter-spacing: 2px;
+  vertical-align: middle;
+}
+
+.custom-navbar .navbar-brand {
+  font-family: 'Playfair Display', serif !important;   /* ROYELLA */
+}
+
+.custom-navbar .navbar-brand span {
+  font-family: 'Ovo', serif !important;                /* brand */
+}
+
+
+  .custom-navbar .navbar-toggler {
+    border-color: transparent; }
+    .custom-navbar .navbar-toggler:active, .custom-navbar .navbar-toggler:focus {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      outline: none; }
+  @media (min-width: 992px) {
+    .custom-navbar .custom-navbar-nav li {
+      margin-left: 15px;
+      margin-right: 15px; } }
+ /* NAVBAR - نصوص سوداء + خط سفلي أصفر + فخم جدًا */
+.custom-navbar .custom-navbar-nav .nav-link {
+font-weight: 700 !important;
+  font-size: 15px !important;          /* حجمك المفضل */
+  color: #000000 !important;           /* أسود غامق */
+  padding: 10px 15px !important;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.custom-navbar .custom-navbar-nav .nav-link,
+.custom-navbar .custom-navbar-nav .nav-link:hover,
+.custom-navbar .custom-navbar-nav .nav-link.active {
+  text-decoration: none !important;     /* يقتل أي خط تحت */
+  border-bottom: none !important;       /* يمنع أي border تحت */
+  box-shadow: none !important;          /* يمنع أي shadow يشبه خط */
+}
+/* نحيي أي خط سفلي قديم ممكن يجي */
+.custom-navbar .custom-navbar-nav .nav-link::before,
+.custom-navbar .custom-navbar-nav .nav-link::after {
+  display: none !important;
+}
+/* ==== HOVER & ACTIVE أغمق وفخم جدًا (رمادي داكن + يبان من بعيد) ==== */
+.custom-navbar .custom-navbar-nav .nav-link:hover,
+.custom-navbar .custom-navbar-nav .nav-link.active {
+  color: #000000 !important;
+  font-weight: 900 !important;                          /* أثقل وأوضح */
+  background: rgba(0, 0, 0, 0.22) !important;           /* رمادي غامق فخم جدًا */
+  border-radius: 10px !important;                      /* زاوية أكبر وأنيقة */
+  padding: 12px 22px !important;                        /* حجم أكبر ومريح للعين */
+  transform: translateY(-3px) scale(1.02);             /* يطلع + يكبر شوية = حركة ملكية */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18) !important; /* ظل قوي وفخم */
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* الصفحة المفتوحة (active) تكون أقوى شوية من الـ hover */
+.custom-navbar .custom-navbar-nav .nav-link.active {
+  background: rgba(0, 0, 0, 0.28) !important;           /* أغمق من الـ hover */
+  font-weight: 900 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22) !important;
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* الخط السفلي الأصفر (يظهر عند الـ hover والـ active) */
+@media (min-width: 768px) {
+  .custom-navbar .custom-navbar-nav .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 15px;
+    right: 15px;
+    height: 4px;
+   
+    width: 0;
+    transition: width 0.25s ease-out;
+  }
+
+  .custom-navbar .custom-navbar-nav .nav-link:hover::before,
+  .custom-navbar .custom-navbar-nav .nav-link.active::before {
+    width: calc(100% - 30px);
+  }
+}
+
+/* الأيقونات (user + cart) سوداء كمان */
+.custom-navbar-cta img {
+  filter: brightness(0) saturate(100%);   /* أسود 100% */
+  opacity: 0.7;
+  width: 22px;
+  transition: 0.3s;
+}
+.custom-navbar-cta img:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+.hero {
+  position: relative;
+  height: 50vh;
+  min-height: 400px;
+  padding: 0;   /* احذف padding الغلط */
+}
+  @media (min-width: 768px) {
+    .hero {
+      padding: calc(4rem - 30px) 0 4rem 0; } }
+  @media (min-width: 992px) {
+    .hero {
+      padding: calc(8rem - 30px) 0 8rem 0; } }
+
+  .hero .intro-excerpt {
+    position: relative;
+    z-index: 4; }
+    
+    @media (min-width: 992px) {
+      .hero .intro-excerpt {
+        max-width: 450px; } 
+      }
+      /* هادو بركة يخليو الكتابة والزر في نص الصفحة 100% */
+.hero .intro-excerpt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+    width: 90%;
+    max-width: 600px;
+}
+/* الأنيميشن يشتغل مرة وحدة فقط */
+.hero h1,
+.hero .mb-4,
+.hero .btn-shop-now {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 1.2s ease forwards;
+}
+
+/* بعد ما يخلّص الأنيميشن يبقى ظاهر عادي */
+.hero h1 { animation-delay: 0.5s; }
+.hero .mb-4 { animation-delay: 1.6s; }
+.hero .btn-shop-now { animation-delay: 2.3s; }
+
+/* اللي يخلّي الأنيميشن ما يعاودش كل مرة */
+.hero h1.animated,
+.hero .mb-4.animated,
+.hero .btn-shop-now.animated {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    animation: none !important;
+}
+
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* موبايل صغير ومتوسط */
+@media (max-width: 480px) {
+    .hero h1 { font-size: 25px !important; }
+    .hero .mb-4 { font-size: 18px !important; }
+    .btn-shop-now { padding: 14px 36px !important; font-size: 16px !important; }
+}
+
+/* موبايل كبير (Plus, Pro Max, Fold...) من 480px لـ 991px */
+@media (min-width: 481px) and (max-width: 991px) {
+    .hero h1 { 
+        font-size: 30px !important;   /* حجم ملكي على التليفونات الكبيرة */
+        line-height: 1.1;
+    }
+    .hero .mb-4 { 
+        font-size: 28px !important; 
+    }
+    .btn-shop-now { 
+        padding: 18px 56px !important; 
+        font-size: 18px !important; 
+    }
+}
+
+
+
+  .hero h1 {
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px; }
+
+    @media (min-width: 1400px) {
+      .hero h1 {
+        font-size: 44px; } }
+
+        .hero::before {
+          content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('../../../../assets/images/aaa.png');
+          background-size: cover;
+            background-position: center;
+            z-index: 1;
+            animation: slideshow 12s infinite;}
+         
+
+.hero p {
+    color: rgba(0, 0, 0, 0.65) !important;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 45px !important;
+ 
+}
+  .hero .hero-img-wrap {
+
+    position: relative;
+  overflow: hidden;                    /* جديد: يخفي أي شيء خارج */
+  padding: 0 !important;
+  margin: 0 !important;}
+
+    .hero .hero-img-wrap img {
+      position: relative;
+      top: 0px;
+      right: 0px;
+      z-index: 2;
+      max-width: 780px;
+      left: -20px; }
+
+      @media (min-width: 768px) {
+        .hero .hero-img-wrap img {
+          right: 0px;
+          left: -100px; } }
+      @media (min-width: 992px) {
+        .hero .hero-img-wrap img {
+          left: 0px;
+          top: -80px;
+          position: absolute;
+          right: -50px; } }
+      @media (min-width: 1200px) {
+        .hero .hero-img-wrap img {
+          left: 0px;
+          top: -80px;
+          right: -100px; } }
+    .hero .hero-img-wrap:after {
+      content: "";
+      position: absolute;
+      width: 255px;
+      height: 217px;
+    
+      background-size: contain;
+      background-repeat: no-repeat;
+      right: -100px;
+      top: -0px; }
+      @media (min-width: 1200px) {
+        .hero .hero-img-wrap:after {
+          top: -40px; } }
+
+
+
+
+
+
+/* Our Story - Minimal Style */
+.our-story-simple {
+  background-color: #f7f7f7; /* خلفية فاتحة مشابهة للصورة */
+  color: #5b5b5b; /* نص رمادي دافي */
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.story-text {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  
+}
+
+.values-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+
+}
+
+.our-story-simple h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #222;
+}
+
+.our-story-simple p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+
+
+.footer-section {
+  padding: 80px 0;
+  background: #e7e7e7;
+  font-size: 16px; /* تكبير النص */
+}
+
+.footer-section .relative {
+  position: relative;
+}
+
+.footer-section a {
+  text-decoration: none;
+  color: #000000;
+  transition: .3s all ease;
+}
+.footer-section a:hover {
+  color: rgba(47, 47, 47, 0.5);
+}
+
+.footer-section .subscription-form {
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+  margin-top: 100px;
+}
+@media (min-width: 992px) {
+  .footer-section .subscription-form {
+    margin-top: 0px;
+    margin-bottom: 80px;
+  }
+}
+.footer-section .subscription-form h3 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+}
+.footer-section .subscription-form .form-control {
+  height: 50px;
+  border-radius: 10px;
+  font-family: "Inter", sans-serif;
+}
+.footer-section .subscription-form .form-control:active,
+.footer-section .subscription-form .form-control:focus {
+  outline: none;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+  border-color: #000000;
+}
+.footer-section .subscription-form .form-control::-webkit-input-placeholder,
+.footer-section .subscription-form .form-control::-moz-placeholder,
+.footer-section .subscription-form .form-control:-ms-input-placeholder,
+.footer-section .subscription-form .form-control:-moz-placeholder {
+  font-size: 14px;
+}
+.footer-section .subscription-form .btn {
+  border-radius: 10px !important;
+}
+
+.footer-section .sofa-img {
+  position: absolute;
+  top: -200px;
+  z-index: 1;
+  right: 0;
+}
+.footer-section .sofa-img img {
+  max-width: 380px;
+}
+
+/* المسافة بين الأعمدة */
+.footer-section .links-wrap,
+.footer-section .footer-logo-wrap,
+.footer-section .contact-wrap {
+  margin-right: 80px;
+}
+
+.footer-section .links-wrap ul li {
+  margin-bottom: 15px; /* مسافة بين عناصر القائمة */
+}
+
+.footer-section .footer-logo-wrap .footer-logo {
+  font-size: 32px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000000;
+}
+
+.footer-section .custom-social li {
+  margin: 5px; /* زيادة المسافة بين الأيقونات */
+  display: inline-block;
+}
+.footer-section .custom-social li a {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  display: inline-block;
+  background: #e7e7e7;
+  color: #000000;
+  border-radius: 50%;
+  font-size: 18px; /* تكبير الأيقونات */
+}
+.footer-section .custom-social li a:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.footer-section .border-top {
+  border-color: #dce5e4;
+}
+.footer-section .border-top.copyright {
+  font-size: 14px !important;
+}
+
+
+
+
+
+
+/* الحاوية الأساسية */
+.cart-container {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+}
+
+/* تنسيق الدائرة (الرقم) */
+.cart-badge {
+    position: absolute;
+    top: 5px;      /* تحريكه للأعلى */
+    right: 2px;    /* تحريكه لليمين فوق الأيقونة */
+    background-color: #000; /* لون أسود ليتماشى مع ROYELLA */
+    color: #fff;   /* رقم أبيض */
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%; /* دائرة كاملة */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff; /* إطار أبيض ليفصلها عن الأيقونة */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+
+/* تغيير لون أيقونة المنيو (3 خطوط) للأسود */
+@media (max-width: 991px) {
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+    }
+
+    /* تنحية الإطار اللي يجي حول الزر كي تضغط عليه */
+    .navbar-toggler {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+}
+

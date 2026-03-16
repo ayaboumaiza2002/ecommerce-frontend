@@ -1,0 +1,1082 @@
+ /*
+* Template Name: UntreeStore
+* Template Author: Untree.co
+* Author URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/
+
+body {
+overflow-x: hidden !important;
+  width: 100%;
+  margin: 0;
+  padding: 0;}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  color: #6a6a6a;
+  font-size: 14px;
+  background-color: #eff2f1;
+ width: 100vw;  }
+ .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+a {
+  text-decoration: none;
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+  color: #2f2f2f;
+  text-decoration: underline; }
+  a:hover {
+    color: #2f2f2f;
+    text-decoration: none; }
+  a.more {
+    font-weight: 600; }
+
+.custom-navbar {
+position: fixed;
+  top: 0; left: 0; width: 100%;
+  z-index: 9999 !important;
+ background: rgba(255, 255, 255, 0.25) !important; /* شفافية أقل = blur يبان */
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+
+  transition: all 0.4s ease;
+}
+  
+/* ==== LOGO ROYELLA brand ==== */
+.custom-navbar .navbar-brand {
+  font-size: 36px !important;
+  font-weight: 800 !important;
+  color: #000000 !important;           /* أسود غامق */
+  text-decoration: none;
+  letter-spacing: -1px;
+}
+
+.custom-navbar .navbar-brand span {
+  font-weight: 500 !important;         /* خفيفة بزاف */
+  font-size: 20px !important;          /* حجم أصغر */
+  opacity: 0.6 !important;
+  color: #000000 !important;
+  letter-spacing: 2px;
+  vertical-align: middle;
+}
+
+.custom-navbar .navbar-brand {
+  font-family: 'Playfair Display', serif !important;   /* ROYELLA */
+}
+
+.custom-navbar .navbar-brand span {
+  font-family: 'Ovo', serif !important;                /* brand */
+}
+
+
+  .custom-navbar .navbar-toggler {
+    border-color: transparent; }
+    .custom-navbar .navbar-toggler:active, .custom-navbar .navbar-toggler:focus {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      outline: none; }
+  @media (min-width: 992px) {
+    .custom-navbar .custom-navbar-nav li {
+      margin-left: 15px;
+      margin-right: 15px; } }
+ /* NAVBAR - نصوص سوداء + خط سفلي أصفر + فخم جدًا */
+.custom-navbar .custom-navbar-nav .nav-link {
+font-weight: 700 !important;
+  font-size: 15px !important;          /* حجمك المفضل */
+  color: #000000 !important;           /* أسود غامق */
+  padding: 10px 15px !important;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.custom-navbar .custom-navbar-nav .nav-link,
+.custom-navbar .custom-navbar-nav .nav-link:hover,
+.custom-navbar .custom-navbar-nav .nav-link.active {
+  text-decoration: none !important;     /* يقتل أي خط تحت */
+  border-bottom: none !important;       /* يمنع أي border تحت */
+  box-shadow: none !important;          /* يمنع أي shadow يشبه خط */
+}
+/* نحيي أي خط سفلي قديم ممكن يجي */
+.custom-navbar .custom-navbar-nav .nav-link::before,
+.custom-navbar .custom-navbar-nav .nav-link::after {
+  display: none !important;
+}
+/* ==== HOVER & ACTIVE أغمق وفخم جدًا (رمادي داكن + يبان من بعيد) ==== */
+.custom-navbar .custom-navbar-nav .nav-link:hover,
+.custom-navbar .custom-navbar-nav .nav-link.active {
+  color: #000000 !important;
+  font-weight: 900 !important;                          /* أثقل وأوضح */
+  background: rgba(0, 0, 0, 0.22) !important;           /* رمادي غامق فخم جدًا */
+  border-radius: 10px !important;                      /* زاوية أكبر وأنيقة */
+  padding: 12px 22px !important;                        /* حجم أكبر ومريح للعين */
+  transform: translateY(-3px) scale(1.02);             /* يطلع + يكبر شوية = حركة ملكية */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18) !important; /* ظل قوي وفخم */
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* الصفحة المفتوحة (active) تكون أقوى شوية من الـ hover */
+.custom-navbar .custom-navbar-nav .nav-link.active {
+  background: rgba(0, 0, 0, 0.28) !important;           /* أغمق من الـ hover */
+  font-weight: 900 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22) !important;
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* الخط السفلي الأصفر (يظهر عند الـ hover والـ active) */
+@media (min-width: 768px) {
+  .custom-navbar .custom-navbar-nav .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 15px;
+    right: 15px;
+    height: 4px;
+   
+    width: 0;
+    transition: width 0.25s ease-out;
+  }
+
+  .custom-navbar .custom-navbar-nav .nav-link:hover::before,
+  .custom-navbar .custom-navbar-nav .nav-link.active::before {
+    width: calc(100% - 30px);
+  }
+}
+
+/* الأيقونات (user + cart) سوداء كمان */
+.custom-navbar-cta img {
+  filter: brightness(0) saturate(100%);   /* أسود 100% */
+  opacity: 0.7;
+  width: 22px;
+  transition: 0.3s;
+}
+.custom-navbar-cta img:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+.hero {
+  background: transparent;
+  
+  padding: calc(4rem - 30px) 0 0rem 0; }
+  @media (min-width: 768px) {
+    .hero {
+      padding: calc(4rem - 30px) 0 4rem 0; } }
+  @media (min-width: 992px) {
+    .hero {
+      padding: calc(8rem - 30px) 0 8rem 0; } }
+
+  .hero .intro-excerpt {
+    position: relative;
+    z-index: 4; }
+    
+    @media (min-width: 992px) {
+      .hero .intro-excerpt {
+        max-width: 450px; } 
+      }
+      /* هادو بركة يخليو الكتابة والزر في نص الصفحة 100% */
+.hero .intro-excerpt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+    width: 90%;
+    max-width: 600px;
+}
+/* الأنيميشن يشتغل مرة وحدة فقط */
+.hero h1,
+.hero .mb-4,
+.hero .btn-shop-now {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 1.2s ease forwards;
+}
+
+/* بعد ما يخلّص الأنيميشن يبقى ظاهر عادي */
+.hero h1 { animation-delay: 0.5s; }
+.hero .mb-4 { animation-delay: 1.6s; }
+.hero .btn-shop-now { animation-delay: 2.3s; }
+
+/* اللي يخلّي الأنيميشن ما يعاودش كل مرة */
+.hero h1.animated,
+.hero .mb-4.animated,
+.hero .btn-shop-now.animated {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    animation: none !important;
+}
+
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* موبايل صغير ومتوسط */
+@media (max-width: 480px) {
+    .hero h1 { font-size: 25px !important; }
+    .hero .mb-4 { font-size: 18px !important; }
+    .btn-shop-now { padding: 14px 36px !important; font-size: 16px !important; }
+}
+
+/* موبايل كبير (Plus, Pro Max, Fold...) من 480px لـ 991px */
+@media (min-width: 481px) and (max-width: 991px) {
+    .hero h1 { 
+        font-size: 30px !important;   /* حجم ملكي على التليفونات الكبيرة */
+        line-height: 1.1;
+    }
+    .hero .mb-4 { 
+        font-size: 28px !important; 
+    }
+    .btn-shop-now { 
+        padding: 18px 56px !important; 
+        font-size: 18px !important; 
+    }
+}
+
+
+
+  .hero h1 {
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px; }
+
+    @media (min-width: 1400px) {
+      .hero h1 {
+        font-size: 44px; } }
+
+        .hero::before {
+          content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('../../../../assets/images/bg2025.jpg');
+          background-size: cover;
+            background-position: center;
+            z-index: 1;
+            animation: slideshow 12s infinite;}
+          @keyframes slideshow {
+            0%    { background-image: url('../../../../assets/images/bg2025.jpg'); }
+            33.33% { background-image: url('../../../../assets/images/bg2025.jpg'); }
+            36.33% { background-image: url('../../../../assets/images/bg2.jpg'); }
+            66.66% { background-image: url('../../../../assets/images/bg2.jpg'); }
+            69.66% { background-image: url('../../../../assets/images/bg3.jpg'); }
+            100%  { background-image: url('../../../../assets/images/bg3.jpg'); }
+}
+
+.hero p {
+    color: rgba(0, 0, 0, 0.65) !important;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 45px !important;
+ 
+}
+  .hero .hero-img-wrap {
+
+    position: relative;
+  overflow: hidden;                    /* جديد: يخفي أي شيء خارج */
+  padding: 0 !important;
+  margin: 0 !important;}
+
+    .hero .hero-img-wrap img {
+      position: relative;
+      top: 0px;
+      right: 0px;
+      z-index: 2;
+      max-width: 780px;
+      left: -20px; }
+
+      @media (min-width: 768px) {
+        .hero .hero-img-wrap img {
+          right: 0px;
+          left: -100px; } }
+      @media (min-width: 992px) {
+        .hero .hero-img-wrap img {
+          left: 0px;
+          top: -80px;
+          position: absolute;
+          right: -50px; } }
+      @media (min-width: 1200px) {
+        .hero .hero-img-wrap img {
+          left: 0px;
+          top: -80px;
+          right: -100px; } }
+    .hero .hero-img-wrap:after {
+      content: "";
+      position: absolute;
+      width: 255px;
+      height: 217px;
+    
+      background-size: contain;
+      background-repeat: no-repeat;
+      right: -100px;
+      top: -0px; }
+      @media (min-width: 1200px) {
+        .hero .hero-img-wrap:after {
+          top: -40px; } }
+
+
+
+.btn-shop-now,
+.btn-shop-now:hover,
+.btn-shop-now:focus,
+.btn-shop-now:active {
+    border-bottom: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+.btn-shop-now::before,
+.btn-shop-now::after {
+    content: none !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+.btn-shop-now {
+    display: inline-block;
+    background: #171717 !important;           /* أسود نقي */
+    color: #ffffff !important;                /* كتابة بيضاء */
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 2px;
+    padding: 18px 20px !important;
+    border-radius: 12px !important;
+    text-transform: uppercase;
+    border: none !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+}
+
+/* عند الـ hover → رمادي فاتح + كتابة سوداء */
+.btn-shop-now:hover {
+    background: #e0e0e0 !important;           /* رمادي فاتح أنيق */
+    color: #000000 !important;                /* كتابة سوداء */
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* للموبايل يبقى حلو ومش كبير بزاف */
+@media (max-width: 767px) {
+    .btn-shop-now {
+        padding: 16px 36px !important;
+        font-size: 17px;
+    }
+}
+
+
+/* ====== قسم الكاتيغوريات الجديد - بعيد على الـ hero + عنوان فخم + صور أوسع ====== */
+.categories-section-wrapper {
+    margin-top: 300px;        /* مسافة كبيرة من الـ hero */
+    padding: 80px 0 120px;
+    background: #fafafa;
+}
+.section-main-title {
+    font-size: 50px;
+    font-weight: 650;
+    font-family: 'Playfair Display', serif;
+    color: #1a1a1a;
+    letter-spacing: -1px;
+    margin: 0;
+}
+
+.section-subtitle {
+    font-size: 22px;
+    color: #666;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+.category-card {
+    display: block;
+    height: 420px;
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    transition: all 0.5s ease;
+}
+.category-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.7s ease;
+    z-index: 1;
+}
+.category-card:hover::before {
+    transform: scale(1.08);
+}
+
+.category-card:hover {
+    transform: translateY(-18px);
+    box-shadow: 0 35px 80px rgba(0,0,0,0.2);
+}
+
+/* overlay أسود خفيف + كتابة بيضاء واضحة جدًا */
+.category-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+    z-index: 1;
+    border-radius: 0 0 28px 28px;
+    transition: all 0.5s ease;
+}
+
+.category-content {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 2;
+    color: white !important;
+    width: 90%;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.7);
+}
+
+.category-title {
+    font-size: 50px;
+    font-weight: 550;
+    font-family: 'Playfair Display', serif;
+    margin: 0 0 15px 0;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+
+.category-desc {
+    font-size: 18px;
+    opacity: 0.95;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+
+
+/* موبايل */
+@media (max-width: 767px) {
+    .categories-section-wrapper { margin-top: 400px; padding: 70px 0; }
+    .category-card { height: 420px; border-radius: 20px; }
+    .category-title { font-size: 28px; }
+    .category-desc   { font-size: 15px; }
+    .category-content { bottom: 40px; }
+}
+
+/* الأسهم البيضاء الدائرية نفس اللي في الـ Hero تمامًا */
+.hero-style-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64px;
+    height: 64px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    color: #000;
+}
+
+.hero-style-arrow:hover {
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    background: #f8f8f8;
+}
+
+.arrow-left {
+    left: 20px;
+}
+
+.arrow-right {
+    right: 20px;
+}
+
+/* على الموبايل */
+@media (max-width: 767px) {
+    .hero-style-arrow {
+        width: 56px;
+        height: 56px;
+    }
+    .arrow-left { left: 10px; }
+    .arrow-right { right: 10px; }
+}
+
+
+
+
+/* Discover Our Brand - Full Background + Blur + Centered Text */
+.discover-brand-fullbg {
+    position: relative;
+    padding: 180px 0;
+    overflow: hidden;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+.discover-brand-fullbg .container {
+    position: relative;
+    z-index: 10;               /* هذا أهم سطر */
+}
+
+.brand-title,
+.brand-text {
+    position: relative;
+    z-index: 15;               /* فوق الـ overlay كامل */
+    color: #ffffff !important;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.8) !important;
+}
+
+/* الصورة خلفية للقسم كامل */
+.brand-bg-image {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('../../../../assets/images/bg2025.jpg');   /* حطي صورة فخمة هنا */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;   /* بارالاكس خفيف = تحفة */
+    z-index: 1;
+}
+
+/* طبقة البلور + الداكن الخفيف */
+.brand-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(20px);           /* البلور اللي تحبيه */
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2;
+}
+
+/* الكادر الأنيق الجديد (زجاجي + خط ذهبي + ظل ناعم) */
+.brand-text-box {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    border-radius: 32px;
+    padding: 60px 50px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.25),
+        inset 0 0 30px rgba(255, 255, 255, 0.06);
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    animation: boxReveal 2.2s ease forwards 0.5s;
+    opacity: 0;
+}
+
+/* خط ذهبي رفيع من تحت (فخامة ملكية) */
+.brand-text-box::before {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+/* الكتابة داخل الكادر */
+.brand-text-box .brand-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 68px;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 24px;
+    letter-spacing: -1.8px;
+    text-shadow: 0 6px 30px rgba(0,0,0,0.6);
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 1.8s ease forwards 1s;
+}
+
+.brand-text-box .brand-text {
+    font-size: 21px;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.96);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1.8s ease forwards 1.5s;
+}
+
+/* أنيميشن دخول الكادر + الكتابة */
+@keyframes boxReveal {
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* على الموبايل */
+@media (max-width: 992px) {
+    .brand-text-box {
+        padding: 40px 20px;
+        border-radius: 26px;
+    }
+    .brand-text-box .brand-title { font-size: 38px; }
+    .brand-text-box .brand-text { font-size: 17px; }
+}
+@media (max-width: 576px) {
+    .brand-text-box .brand-title { font-size: 30px; }
+    .brand-text-box .brand-text { font-size: 16px; }
+    .brand-text-box { padding: 40px 25px; }
+}
+
+/* أنيميشن دخول فخم جدًا للكتابة */
+.brand-title,
+.brand-text {
+    opacity: 0;
+    transform: translateY(60px);
+    animation: fadeUpIn 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.brand-title {
+    animation-delay: 0.6s;
+}
+
+.brand-text {
+    animation-delay: 1.1s;
+}
+
+@keyframes fadeUpIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* باش الأنيميشن يشتغل مرة وحدة فقط (ما يعاودش كل رفرش) */
+.brand-animated .brand-title,
+.brand-animated .brand-text,
+.brand-animated .brand-bg-image,
+.brand-animated .brand-overlay {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.nouveautes-minimal {
+    padding: 160px 0 200px;
+    background: #fdfdfd;
+}
+
+.minimal-card {
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+.minimal-card img {
+    width: 100%;
+    height: 620px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 0;
+    box-shadow: none;
+    transition: transform 0.7s ease;
+}
+
+.minimal-card:hover img {
+    transform: scale(1.04);
+}
+
+.minimal-title {
+    margin-top: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+}
+
+/* على الموبايل */
+@media (max-width: 768px) {
+    .nouveautes-minimal { padding: 100px 0 140px; }
+    .minimal-card img { height: 480px; }
+    .minimal-title { font-size: 23px; margin-top: 18px; }
+}
+
+@media (max-width: 576px) {
+    .minimal-card img { height: 420px; }
+    .minimal-title { font-size: 21px; }
+}
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+.nouveautes-bg {
+    background: #fff;
+    padding: 120px 0;
+}
+
+/* الصور من الـ CSS */
+.nouv-img {
+    width: 100%;
+    height: 520px;
+    background-size: cover;
+    background-position: top center;
+    transition: transform 0.7s ease;
+    margin-bottom: 20px;
+}
+
+.spring-collection  { background-image: url('../../../../assets/images/mod1.jpg'); }
+.prime-collection    { background-image: url('../../../../assets/images/mod2.jpg'); }
+.wonder-collection   { background-image: url('../../../../assets/images/mod3.jpg'); }
+
+/* عند الـ hover على الكارت كامل */
+.nouv-card-bg:hover .nouv-img {
+    transform: scale(1.04);
+}
+
+.nouv-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #111;
+    margin: 25px 0 0 0 !important;
+    letter-spacing: -0.5px;
+}
+
+.shop-now-btn {
+    display: inline-block;
+    background: #000;
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 14px 38px;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+}
+
+.shop-now-btn:hover {
+    background: #333;
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    color: #fff !important;
+}
+.collection-price {
+    font-size: 24px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0 0 20px 0;
+}
+
+/* موبايل */
+@media (max-width: 992px) {
+    .nouv-img { height: 600px; }
+    .nouv-title { font-size: 24px; }
+}
+
+@media (max-width: 576px) {
+    .nouv-img { height: 500px; }
+    .shop-now-btn { padding: 12px 30px; font-size: 13px; }
+}
+
+
+
+
+.custom-list {
+  width: 100%; }
+  .custom-list li {
+    display: inline-block;
+    width: calc(50% - 20px);
+    margin-bottom: 12px;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 20px; }
+    .custom-list li:before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 2px solid #3b5d50;
+      position: absolute;
+      left: 0;
+      top: 8px; }
+
+
+.footer-section {
+  padding: 80px 0;
+  background: #e7e7e7;
+  font-size: 16px; /* تكبير النص */
+}
+
+.footer-section .relative {
+  position: relative;
+}
+
+.footer-section a {
+  text-decoration: none;
+  color: #000000;
+  transition: .3s all ease;
+}
+.footer-section a:hover {
+  color: rgba(47, 47, 47, 0.5);
+}
+
+.footer-section .subscription-form {
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+  margin-top: 100px;
+}
+@media (min-width: 992px) {
+  .footer-section .subscription-form {
+    margin-top: 0px;
+    margin-bottom: 80px;
+  }
+}
+.footer-section .subscription-form h3 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+}
+.footer-section .subscription-form .form-control {
+  height: 50px;
+  border-radius: 10px;
+  font-family: "Inter", sans-serif;
+}
+.footer-section .subscription-form .form-control:active,
+.footer-section .subscription-form .form-control:focus {
+  outline: none;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+  border-color: #000000;
+}
+.footer-section .subscription-form .form-control::-webkit-input-placeholder,
+.footer-section .subscription-form .form-control::-moz-placeholder,
+.footer-section .subscription-form .form-control:-ms-input-placeholder,
+.footer-section .subscription-form .form-control:-moz-placeholder {
+  font-size: 14px;
+}
+.footer-section .subscription-form .btn {
+  border-radius: 10px !important;
+}
+
+.footer-section .sofa-img {
+  position: absolute;
+  top: -200px;
+  z-index: 1;
+  right: 0;
+}
+.footer-section .sofa-img img {
+  max-width: 380px;
+}
+
+/* المسافة بين الأعمدة */
+.footer-section .links-wrap,
+.footer-section .footer-logo-wrap,
+.footer-section .contact-wrap {
+  margin-right: 80px;
+}
+
+.footer-section .links-wrap ul li {
+  margin-bottom: 15px; /* مسافة بين عناصر القائمة */
+}
+
+.footer-section .footer-logo-wrap .footer-logo {
+  font-size: 32px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000000;
+}
+
+.footer-section .custom-social li {
+  margin: 5px; /* زيادة المسافة بين الأيقونات */
+  display: inline-block;
+}
+.footer-section .custom-social li a {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  display: inline-block;
+  background: #e7e7e7;
+  color: #000000;
+  border-radius: 50%;
+  font-size: 18px; /* تكبير الأيقونات */
+}
+.footer-section .custom-social li a:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.footer-section .border-top {
+  border-color: #dce5e4;
+}
+.footer-section .border-top.copyright {
+  font-size: 14px !important;
+}
+
+
+/* الحاوية الأساسية */
+.cart-container {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+}
+
+/* تنسيق الدائرة (الرقم) */
+.cart-badge {
+    position: absolute;
+    top: 5px;      /* تحريكه للأعلى */
+    right: 2px;    /* تحريكه لليمين فوق الأيقونة */
+    background-color: #000; /* لون أسود ليتماشى مع ROYELLA */
+    color: #fff;   /* رقم أبيض */
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%; /* دائرة كاملة */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff; /* إطار أبيض ليفصلها عن الأيقونة */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+/* هذا الكلاس يطبق على الـ div اللي فيه الكارتات */
+.categories-container {
+    display: flex;
+    transition: all 0.6s ease-in-out; /* هنا السر: 0.6 ثانية هي اللي تدير البطء */
+}
+
+/* الأنيميشن اللي يخليها تدخل بـ "حنية" */
+.animate-fade {
+    animation: slideAndFade 0.6s ease-in-out forwards;
+}
+
+@keyframes slideAndFade {
+    0% {
+        opacity: 0;
+        transform: translateX(30px); /* تبدا من اليمين بشوية */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); /* تستقر في مكانها */
+    }
+}
+
+/* اصلاح الـ Hero للموبايل */
+@media (max-width: 767px) {
+  .hero {
+    min-height: 80vh; /* يضمن مساحة كافية */
+    display: flex;
+    align-items: center;
+    padding: 0 !important;
+  }
+  .hero .intro-excerpt {
+    position: relative; /* نحيناها من absolute باش ما تخرجش */
+    top: auto; left: auto; transform: none;
+    width: 100%;
+    padding: 20px;
+    margin-top: 50px;
+  }
+  .hero h1 { font-size: 28px !important; }
+}
+
+/* اصلاح الـ Container والـ Rows */
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* منع خروج العناصر عن الشاشة */
+body {
+  overflow-x: hidden !important;
+  width: 100%;
+}
+/* هذا الكود اللي عندك درك */
+@media (max-width: 767px) {
+    .categories-section-wrapper { 
+        margin-top: 400px; /* هذا هو السبب اللي هبطها بزاف */
+        padding: 70px 0; 
+    }
+    /* ... */
+}
+
+/* بدليه بهذا الكود الجديد باش تطلع الفوق وتولي متناسقة */
+@media (max-width: 767px) {
+    .categories-section-wrapper { 
+        margin-top: 100px;  /* نقصناها من 400 لـ 50 باش تطلع تحت الـ Hero مباشرة */
+        padding: 40px 0;   /* نقصنا الـ padding باش ما تبانش بعيدة */
+    }
+    .category-card { 
+        height: 350px;     /* صغّرنا طول الكارت باش تبان كاملة في التلفون */
+        border-radius: 20px; 
+    }
+}
+/* 1. ضمان أن الحاوية تسمح بترتيب العناصر جنب بعض */
+.row {
+    display: flex;
+    flex-wrap: wrap; /* هذا هو السر: إذا ما كفاتش المساحة، العنصر الثاني ينزل تحت الأول */
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+/* 2. تنسيق الكارتات في الموبايل */
+@media (max-width: 767px) {
+    .category-card {
+        height: 350px;       /* صغّرنا الطول باش ما تجيش الكارت طويلة بزاف في الموبايل */
+        margin-bottom: 20px; /* مسافة بين الكارتات كي يوليوا فوق بعض */
+        border-radius: 20px;
+    }
+}
+
+/* 3. تنسيق الكارتات في الديسكتوب */
+@media (min-width: 768px) {
+    .category-card {
+        height: 420px;       /* في الديسكتوب خليهم طوال شوية ومريحين */
+    }
+}
+
+/* 4. إجبار الكارت على ملء المساحة المخصصة لها */
+.category-card {
+    display: block;
+    width: 100%;             /* الكارت تاخذ عرض الـ col اللي راهي فيه */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+}
+/* هذا الكود يخص الموبايل فقط */
+@media (max-width: 767px) {
+    /* نخلو السطر يشد عنصر واحد */
+    .categories-section-wrapper .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* نخلو الكارت تاخذ العرض الكامل وتكبر */
+    .categories-section-wrapper .col-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0 15px; /* فراغ جانبي بسيط */
+    }
+
+    .category-card {
+        height: 400px; /* تقدري تطلعي هذا الرقم إذا حبيتي الكارت تكون أكبر */
+        width: 100%;
+    }
+}

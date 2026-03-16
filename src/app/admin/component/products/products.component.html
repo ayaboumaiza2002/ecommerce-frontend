@@ -1,0 +1,336 @@
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    <header class="header">
+      <div class="header-left">
+        <button class="menu-toggle" (click)="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input 
+            type="text" 
+            placeholder="Search products by name or category..." 
+            [(ngModel)]="searchTerm" 
+            (input)="onSearchChange()" 
+          />
+        </div>
+      </div>
+      <div class="header-right">
+  <button class="icon-btn" (click)="openMessages()">
+    <i class="fas fa-bell"></i>
+    <span class="notification-dot" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+  </button>
+</div>
+    </header>
+
+    <div class="content">
+      <div class="page-header">
+        <div>
+          <h1>Products</h1>
+          <p class="subtitle">Manage your product inventory & promotions</p>
+        </div>
+        <button class="btn btn-primary" (click)="openModal()">
+          <i class="fas fa-plus"></i> Add Product
+        </button>
+      </div>
+
+      <div class="table-card">
+        <table class="products-table">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Price (Original / Promo)</th>
+              <th>Stock</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th class="text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let produit of filteredProduits">
+              <td>
+                <div class="product-info">
+                  <img *ngIf="produit.imageUrls && produit.imageUrls.length > 0" 
+                       [src]="'http://localhost:8081' + produit.imageUrls[0]" 
+                       alt="Product" class="product-img" />
+                  
+                  <img *ngIf="!produit.imageUrls || produit.imageUrls.length === 0" 
+                       src="assets/no-image.png" alt="No Image" class="product-img" />
+
+                  <div class="product-name">{{produit.nom}}</div>
+                </div>
+              </td>
+              <td class="font-medium">
+                <div *ngIf="produit.prixPromo && produit.prixPromo > 0">
+                  <span class="text-muted text-decoration-line-through small">{{ produit.prix }}</span>
+                  <br>
+                  <span class="text-danger fw-bold">{{ produit.prixPromo }} DZD</span>
+                </div>
+                <div *ngIf="!produit.prixPromo || produit.prixPromo <= 0">
+                  {{ produit.prix }} DZD
+                </div>
+              </td>
+              <td>{{ produit.quantiteStock }}</td>
+              <td>{{ produit.categorie }}</td>
+              <td>
+                <span *ngIf="produit.prixPromo > 0" class="badge bg-warning text-dark me-1">Promo</span>
+                <span class="badge badge-active">● Active</span>
+              </td>
+              <td class="text-right">
+                <button class="btn btn-sm btn-primary" (click)="openUpdateModal(produit)">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="btn btn-sm btn-ghost" (click)="openDeleteModal(produit)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="filteredProduits.length === 0">
+              <td colspan="6" class="text-center py-4">No products found matching "{{searchTerm}}"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add New Product</h2>
+        <button class="modal-close" (click)="closeModal()">&times;</button>
+      </div>
+
+      <form (ngSubmit)="addProduct(productForm)" #productForm="ngForm" class="product-form">
+        <div class="form-actions mb-4">
+          <button type="button" class="btn btn-outline" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Add Product</button>
+        </div>
+
+        <div class="form-group">
+          <label>Product Name</label>
+          <input type="text" name="nom" [(ngModel)]="newProduct.nom" required>
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" rows="3" [(ngModel)]="newProduct.description" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Quantity Stock</label>
+            <input type="number" name="quantiteStock" [(ngModel)]="newProduct.quantiteStock" required>
+          </div>
+          <div class="form-group">
+            <label>Original Price</label>
+            <input type="number" name="prix" [(ngModel)]="newProduct.prix" step="0.01" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Promo Price (Optional)</label>
+          <input type="number" name="prixPromo" [(ngModel)]="newProduct.prixPromo" step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <select name="categorie" [(ngModel)]="newProduct.categorie" required>
+            <option value="">Select a category</option>
+            <option value="Abaya">Abaya</option>
+  <option value="Ensemble">Ensemble</option>
+  <option value="Robe">Robe</option>
+          </select>
+        </div>
+
+        <div class="form-row border-top pt-3 mt-3">
+          <div class="form-group">
+            <label>Sizes</label>
+            <div class="d-flex gap-2 mb-2">
+              <input type="text" name="newSize" [(ngModel)]="newSize" placeholder="Ex: M" style="flex:1">
+              <button type="button" class="btn btn-dark btn-sm" (click)="addSize()">+</button>
+            </div>
+            <div class="tags-list">
+              <span *ngFor="let s of newProduct.tailleDisponible; let i=index" class="badge bg-dark text-white me-1">
+                {{s}} <i class="fas fa-times ms-1" (click)="removeSize(i)"></i>
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Colors</label>
+            <div class="d-flex gap-2 mb-2">
+              <input type="text" name="newColor" [(ngModel)]="newColor" placeholder="Ex: Noir" style="flex:1">
+              <button type="button" class="btn btn-dark btn-sm" (click)="addColor()">+</button>
+            </div>
+            <div class="tags-list">
+              <span *ngFor="let c of newProduct.couleurDisponible; let i=index" class="badge bg-secondary text-white me-1">
+                {{c}} <i class="fas fa-times ms-1" (click)="removeColor(i)"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label>Product Images</label>
+          <div class="image-upload-wrapper">
+            <div class="upload-placeholder">
+              <i class="fas fa-images"></i>
+              <span>Click to upload multiple images</span>
+            </div>
+            <input type="file" accept="image/*" (change)="onImagesSelected($event)" class="hidden-input" multiple>
+          </div>
+
+          <div class="image-gallery-preview" *ngIf="previewImages.length > 0">
+            <div class="preview-item" *ngFor="let img of previewImages; let i = index">
+              <img [src]="img" class="thumb-img" />
+              <button type="button" class="remove-img-btn" (click)="removeImage(i)">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" *ngIf="showUpdateModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Update Product</h2>
+        <button class="modal-close" (click)="closeUpdateModal()">&times;</button>
+      </div>
+
+      <form (ngSubmit)="updateProduct(updateForm)" #updateForm="ngForm" class="product-form">
+        <div class="form-actions mb-4">
+          <button type="button" class="btn btn-outline" (click)="closeUpdateModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+
+        <div class="form-group">
+          <label>Product Name</label>
+          <input type="text" name="nom" [(ngModel)]="editProduct.nom" required>
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" rows="3" [(ngModel)]="editProduct.description" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Quantity Stock</label>
+            <input type="number" name="quantiteStock" [(ngModel)]="editProduct.quantiteStock" required>
+          </div>
+          <div class="form-group">
+            <label>Original Price</label>
+            <input type="number" name="prix" [(ngModel)]="editProduct.prix" step="0.01" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Promo Price</label>
+          <input type="number" name="prixPromo" [(ngModel)]="editProduct.prixPromo" step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <select name="categorie" [(ngModel)]="editProduct.categorie" required>
+            <option value="Abaya">Abaya</option>
+            <option value="Ensemble">Ensemble</option>
+            <option value="Robe">Robe</option>
+          </select>
+        </div>
+
+        <div class="form-row border-top pt-3 mt-3">
+          <div class="form-group">
+            <label>Sizes</label>
+            <div class="d-flex gap-2 mb-2">
+              <input type="text" name="editSize" [(ngModel)]="editSize" style="flex:1">
+              <button type="button" class="btn btn-dark btn-sm" (click)="addEditSize()">+</button>
+            </div>
+            <div class="tags-list">
+              <span *ngFor="let s of editProduct.tailleDisponible; let i=index" class="badge bg-dark text-white me-1">
+                {{s}} <i class="fas fa-times ms-1" (click)="removeEditSize(i)"></i>
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Colors</label>
+            <div class="d-flex gap-2 mb-2">
+              <input type="text" name="editColor" [(ngModel)]="editColor" style="flex:1">
+              <button type="button" class="btn btn-dark btn-sm" (click)="addEditColor()">+</button>
+            </div>
+            <div class="tags-list">
+              <span *ngFor="let c of editProduct.couleurDisponible; let i=index" class="badge bg-secondary text-white me-1">
+                {{c}} <i class="fas fa-times ms-1" (click)="removeEditColor(i)"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label>Product Images</label>
+          <div class="image-upload-wrapper">
+            <div class="upload-placeholder">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <span>Click to add/update images</span>
+            </div>
+            <input type="file" accept="image/*" (change)="onUpdateImagesSelected($event)" class="hidden-input" multiple>
+          </div>
+
+          <div class="image-gallery-preview" *ngIf="updatePreviewImages.length > 0">
+            <div class="preview-item" *ngFor="let img of updatePreviewImages; let i = index">
+              <img [src]="img" class="thumb-img" />
+              <button type="button" class="remove-img-btn" (click)="removeUpdateImage(i)">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+ <div class="modal-overlay" *ngIf="showDeleteModal" (click)="closeDeleteModal()">
+  <div class="details-modal delete-confirm-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header" style="justify-content: center; border: none; padding-bottom: 0;">
+      <h2 style="font-size: 22px;">Delete Product</h2>
+    </div>
+    <div class="modal-body" style="padding: 20px;">
+      <p style="font-size: 16px; color: #333;">Are you sure you want to delete <strong>{{ productToDelete?.nom }}</strong>?</p>
+      <p style="font-size: 13px; color: #e74c3c; margin-top: 10px; font-weight: 500;">
+        <i class="fas fa-exclamation-triangle"></i> This action cannot be undone.
+      </p>
+    </div>
+    <div class="delete-footer" style="padding: 0 30px 30px 30px; display: flex; justify-content: center; gap: 15px;">
+      <button class="btn-cancel" (click)="closeDeleteModal()">Cancel</button>
+      <button class="btn-confirm" (click)="confirmDelete()">Confirm Delete</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="messages-modal-overlay" *ngIf="showMessagesModal" (click)="closeMessages()">
+  <div class="messages-modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Customer Messages</h3>
+      <button class="close-btn" (click)="closeMessages()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div *ngFor="let msg of messages" class="msg-item" [class.unread-item]="!msg.read">
+        <div class="msg-info">
+          <strong>{{ msg.fullName }}</strong>
+          <small>{{ msg.createdAt | date:'short' }}</small>
+        </div>
+        <p class="msg-text">{{ msg.message }}</p>
+        <div class="msg-actions">
+           <span class="email-text">{{ msg.email }}</span>
+           <button *ngIf="!msg.read" (click)="markAsRead(msg.id)" class="mark-btn">Mark as read</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

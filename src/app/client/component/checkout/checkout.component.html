@@ -1,0 +1,173 @@
+<div class="checkout-wrapper py-5 mt-5">
+  <div class="container">
+    <h1 class="section-title text-center mb-5 fw-bold">Finalize Your Order</h1>
+
+    <div class="row g-5" *ngIf="cartItems.length > 0; else emptyCart">
+      
+      <div class="col-lg-7">
+        <div class="checkout-card p-4 shadow-sm border rounded bg-white">
+          <h4 class="mb-4 fw-bold border-bottom pb-2">
+            <i class="fas fa-shipping-fast me-2"></i>Shipping Information
+          </h4>
+          
+          <form #orderForm="ngForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">First Name *</label>
+                <input type="text" class="form-control" [(ngModel)]="clientData.prenom" name="prenom" required placeholder="Your First Name">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Last Name *</label>
+                <input type="text" class="form-control" [(ngModel)]="clientData.nom" name="nom" required placeholder="Your Last Name">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Phone Number *</label>
+              <input type="tel" class="form-control" [(ngModel)]="clientData.telephone" name="telephone" required placeholder="06XXXXXXXX">
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Wilaya *</label>
+                <select class="form-select" [(ngModel)]="clientData.wilaya" name="wilaya" (change)="onWilayaChange()" required>
+                  <option value="" disabled selected>Sélectionner une wilaya</option>
+                  <option *ngFor="let w of wilayas" [value]="w">{{ w }}</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Commune *</label>
+                <select class="form-select" [(ngModel)]="clientData.commune" name="commune" [disabled]="!clientData.wilaya" required>
+                  <option value="" disabled selected>Sélectionner une commune</option>
+                  <option *ngFor="let c of filteredCommunes" [value]="c">{{ c }}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-4" *ngIf="clientData.wilaya">
+              <label class="form-label fw-bold">Méthode de livraison *</label>
+              <div class="d-flex gap-3">
+                <div class="flex-fill p-3 border rounded text-center" 
+                     [ngClass]="{'bg-light border-dark shadow-sm': deliveryType === 'home'}"
+                     (click)="setDeliveryType('home')" style="cursor: pointer; transition: 0.3s;">
+                  <input type="radio" name="delivery" [checked]="deliveryType === 'home'">
+                  <div class="mt-1 small fw-bold">À Domicile</div>
+                </div>
+                <div class="flex-fill p-3 border rounded text-center" 
+                     [ngClass]="{'bg-light border-dark shadow-sm': deliveryType === 'bureau'}"
+                     (click)="setDeliveryType('bureau')" style="cursor: pointer; transition: 0.3s;">
+                  <input type="radio" name="delivery" [checked]="deliveryType === 'bureau'">
+                  <div class="mt-1 small fw-bold">Stop Desk (Bureau)</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Exact Address *</label>
+              <textarea class="form-control" [(ngModel)]="clientData.adresseExacte" name="adresse" rows="2" required placeholder="Cité, Rue, N° de maison..."></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="summary-card p-4 shadow-sm border rounded bg-white sticky-top" style="top: 100px;">
+          <h4 class="mb-4 fw-bold border-bottom pb-2">Order Summary</h4>
+          
+          <div class="items-list mb-4" style="max-height: 400px; overflow-y: auto;">
+            <div *ngFor="let item of cartItems" class="d-flex align-items-start mb-3 pb-3 border-bottom-dashed">
+              
+              <div class="image-box me-3 position-relative" style="width: 75px; height: 95px; flex-shrink: 0; background: #f8f9fa; border-radius: 8px; overflow: hidden; border: 1px solid #eee;">
+                <img [src]="getImgUrl(item.produit.imageUrls)" 
+                     class="w-100 h-100" 
+                     style="object-fit: cover;"
+                     onerror="this.src='assets/images/placeholder.jpg'">
+                <span class="position-absolute top-0 start-0 badge bg-dark" style="font-size: 10px; border-radius: 0 0 5px 0;">
+                  x{{ item.quantite }}
+                </span>
+              </div>
+
+              <div class="flex-grow-1">
+                <h6 class="mb-1 fw-bold text-truncate" style="max-width: 180px;">{{ item.produit.nom }}</h6>
+                <div class="small text-muted mb-1">
+                  <span class="badge bg-light text-dark border">{{ item.taille }}</span>
+                  <span class="badge bg-light text-dark border ms-1">{{ item.couleur }}</span>
+                </div>
+                <div class="small text-danger fw-bold">{{ item.currentPrice }} DZ</div>
+              </div>
+              
+              <div class="text-end fw-bold" style="min-width: 80px;">
+                {{ item.calculatedSousTotal }} DZ
+              </div>
+            </div>
+          </div>
+
+          <div class="totals-box bg-light p-3 rounded">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Sous-total</span>
+              <span class="fw-semibold">{{ totalAmount }} DZ</span>
+            </div>
+            
+            <div class="d-flex justify-content-between mb-2" *ngIf="shippingFee > 0">
+              <span class="text-muted">Frais de livraison ({{ deliveryType === 'home' ? 'Domicile' : 'Stop Desk' }})</span>
+              <span class="fw-bold text-primary">+ {{ shippingFee }} DZ</span>
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between mb-4 mt-2 h4 fw-bold text-dark">
+              <span>TOTAL</span>
+              <span class="text-success">{{ getFinalTotal() }} DZ</span>
+            </div>
+            
+            <button class="btn btn-dark w-100 py-3 fw-bold shadow-sm rounded-pill" 
+                    (click)="placeOrder()" 
+                    [disabled]="!orderForm?.valid || isLoading">
+              <span *ngIf="!isLoading">CONFIRMER LA COMMANDE <i class="fas fa-check-circle ms-2"></i></span>
+              <span *ngIf="isLoading">
+                <span class="spinner-border spinner-border-sm me-2"></span>En cours...
+              </span>
+            </button>
+            
+            <p class="text-center mt-3 mb-0 small text-muted">
+              <i class="fas fa-lock me-1"></i> Paiement sécurisé à la livraison
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #emptyCart>
+      <div class="text-center py-5 shadow-sm border rounded bg-white">
+        <div class="mb-4">
+          <i class="fas fa-shopping-basket fa-4x text-light"></i>
+        </div>
+        <h3 class="fw-bold">Votre panier est vide</h3>
+        <p class="text-muted">Vous n'avez pas encore ajouté d'articles à votre commande.</p>
+        <button class="btn btn-dark px-5 py-2 mt-3 rounded-pill" routerLink="/shop">
+          <i class="fas fa-arrow-left me-2"></i>RETOUR AU SHOP
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<style>
+  .border-bottom-dashed {
+    border-bottom: 1px dashed #dee2e6;
+  }
+  .form-control:focus, .form-select:focus {
+    border-color: #000;
+    box-shadow: none;
+  }
+  .checkout-card, .summary-card {
+    transition: transform 0.3s;
+  }
+  .image-box img {
+    transition: transform 0.5s;
+  }
+  .image-box:hover img {
+    transform: scale(1.1);
+  }
+</style>

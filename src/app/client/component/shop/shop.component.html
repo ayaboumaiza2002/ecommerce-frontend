@@ -1,0 +1,144 @@
+<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+    <div class="container">
+        <a class="navbar-brand">
+            ROYELLA<span>brand</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsFurni">
+            <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/client">Home</a>
+                </li>
+                <li>
+                    <a class="nav-link" [routerLink]="['/shop']">Shop</a>
+                </li>
+                <li><a class="nav-link" [routerLink]="['/about']">About us</a></li>
+                <li><a class="nav-link" routerLink="/contact">Contact us</a></li>
+            </ul>
+
+            <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link cart-container" routerLink="/cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section id="new-collection" class="nouveautes-slider">
+    <div class="container py-5">
+
+        <div class="text-center mb-5">
+            <h2 class="section-main-title fw-bold display-4">All Products</h2>
+            <p class="text-muted fs-5">Elegance crafted for every moment</p>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-5 justify-content-center">
+
+            <div class="col" *ngFor="let prod of produits; let i = index">
+                <div class="nouv-card-bg d-block text-decoration-none text-center text-dark h-100">
+                    
+                    <div class="nouv-img position-relative" 
+                         [style.background-image]="(prod.imageUrls && prod.imageUrls.length > 0) 
+                            ? 'url(' + backendUrl + prod.imageUrls[0] + ')' 
+                            : 'url(assets/images/placeholder.jpg)'">
+                         
+                        <span *ngIf="i < 3" class="badge bg-danger position-absolute m-2 top-0 start-0">NEW</span>
+                        
+                        <span *ngIf="prod.prixPromo && prod.prixPromo > 0" 
+                              class="badge bg-warning text-dark position-absolute m-2 top-0 end-0 fw-bold">
+                              PROMO
+                        </span>
+
+                        <div *ngIf="prod.quantiteStock <= 0" class="out-of-stock-label">
+                            OUT OF STOCK
+                        </div>
+                    </div>
+
+                    <h3 class="nouv-title mt-4">{{ prod.nom }}</h3>
+
+                    <div class="price-container mb-3">
+                        <ng-container *ngIf="prod.prixPromo && prod.prixPromo > 0; else regularPrice">
+                            <span class="text-muted text-decoration-line-through me-2" style="font-size: 1.1rem; opacity: 0.7;">
+                                {{ prod.prix }} DZ
+                            </span>
+                            <span class="collection-price text-danger fw-bold" style="font-size: 1.4rem;">
+                                {{ prod.prixPromo }} DZ
+                            </span>
+                        </ng-container>
+
+                        <ng-template #regularPrice>
+                            <p class="collection-price m-0">{{ prod.prix }} DZ</p>
+                        </ng-template>
+                    </div>
+
+                    <span *ngIf="prod.quantiteStock > 0" class="shop-now-btn mt-2" [routerLink]="['/product', prod.id]">SHOP NOW →</span>
+                    <span *ngIf="prod.quantiteStock <= 0" class="shop-now-btn mt-2 text-muted" style="cursor: not-allowed; opacity: 0.6;">UNAVAILABLE</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer-section">
+    <div class="container relative">
+        <div class="row g-5 mb-5">
+            <div class="col-lg-4">
+                <div class="mb-4 footer-logo-wrap">
+                    <a class="footer-logo">ROYELLA</a>
+                </div>
+                <p class="mb-4">
+                    Made for women who like style without trying too hard. 
+                    Simple shapes, high-quality fabrics, and small details that make a big impression.
+                </p>
+                <ul class="list-unstyled custom-social">
+                    <li><a href="https://www.instagram.com/royella_brand" target="_blank"><span class="fa fa-brands fa-instagram"></span></a></li>
+                    <li><a href="https://www.tiktok.com/@royella_brand" target="_blank"><span class="fa fa-brands fa-tiktok"></span></a></li>
+                    <li><a href="https://www.facebook.com/61574069080577/" target="_blank"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-3">
+                <h5 class="text-black mb-4">Shop</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#new-collection">New Collection</a></li>
+                    <li><a href="#abaya">Abayas</a></li>
+                    <li><a href="#ensemble">Ensembles</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-2">
+                <h5 class="text-black mb-4">Contact</h5>
+                <ul class="list-unstyled">
+                    <li>Algeria</li>
+                    <li>WhatsApp: 0557 15 07 76</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-top copyright">
+            <div class="row pt-4">
+                <div class="col-lg-12 text-center">
+                    <p class="mb-2">
+                        © 2026 ROYELLA — All Rights Reserved | Created by 
+                        <a href="https://www.instagram.com/ayooya_zynona" target="_blank" style="text-decoration: none; color: #000; font-weight: bold;">
+                            A.B
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

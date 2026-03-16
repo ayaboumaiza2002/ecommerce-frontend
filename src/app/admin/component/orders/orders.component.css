@@ -1,0 +1,700 @@
+/* 1. الإعدادات الأساسية والهيكل العام */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #ffffff;
+    color: #000;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 2. الهيدر والبحث */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    color: #000000;
+    transition: background 0.2s;
+    border-radius: 4px;
+}
+
+.menu-toggle:hover {
+    background: #f5f5f5;
+}
+
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f5f5f5;
+    padding: 10px 16px;
+    border-radius: 8px;
+    min-width: 300px;
+}
+
+
+.search-box i {
+    color: #666;
+}
+
+.search-box input {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    color: #000000;
+}
+.header-right {
+    display: flex;
+    gap: 12px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    color: #000000;
+    transition: background 0.2s;
+    border-radius: 4px;
+}
+.icon-btn:hover {
+    background: #f5f5f5;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* 3. محتوى الصفحة والجدول */
+.content {
+    padding: 30px;
+}
+
+.content-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table th {
+    text-align: left;
+    padding: 16px 24px;
+    background: #f9f9f9;
+    color: #666;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.orders-table td {
+    padding: 16px 24px;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+.clickable-row {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.clickable-row:hover {
+    background: #fafafa;
+}
+
+/* 4. معلومات العميل والطلب في الجدول */
+.cust-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.cust-info .name {
+    font-weight: 600;
+}
+
+.cust-info .phone {
+    font-size: 12px;
+    color: #666;
+}
+
+.order-id {
+    font-weight: 600;
+}
+
+.amount {
+    font-weight: 600;
+}
+
+/* 5. شارات الحالة (Status Badges) */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    min-width: 85px;
+    text-transform: capitalize;
+}
+
+.status-badge.pending { background: #f0f0f0; color: #666; }
+.status-badge.confirmed { background: #e6fcf5; color: #28a745; }
+.status-badge.canceled { background: #fff5f5; color: #dc3545; }
+
+/* 6. أزرار الأكشن (Update & Delete) */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-update {
+    background: #fff;
+    border: 1px solid #000;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.2s;
+}
+
+.btn-update:hover { background: #000; color: #fff; }
+
+.btn-delete {
+    background: #fff;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-delete:hover { background: #dc3545; color: #fff; }
+
+/* 7. نوافذ العرض الأساسية (Overlays) */
+.modal-overlay, .popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); /* تعتيم أعمق قليلاً */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px); /* تأثير ضبابي عصري */
+}
+
+/* 8. نافذة تفاصيل الطلب المحسنة (Order Details) */
+.details-modal {
+    background: #ffffff;
+    width: 600px;
+    max-height: 85vh;
+    border-radius: 20px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    animation: slideUp 0.3s ease-out;
+}
+
+.modal-header {
+    padding: 20px 25px;
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.modal-header h2 span {
+    color: #888;
+    font-weight: 400;
+}
+
+.modal-body {
+    padding: 25px;
+    overflow-y: auto;
+}
+
+/* شبكة معلومات الشحن */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.info-card h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-content p {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.info-content .label {
+    font-weight: 600;
+    color: #666;
+}
+
+.address-tag {
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px !important;
+    line-height: 1.4;
+    border-left: 3px solid #000;
+}
+
+.delivery-badge {
+    background: #000;
+    color: #fff;
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-size: 12px;
+}
+
+/* قائمة المنتجات في التفاصيل */
+.items-list-container h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.prod-img-wrapper {
+    width: 65px; height: 65px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid #eee;
+}
+
+.prod-thumb { width: 100%; height: 100%; object-fit: cover; }
+
+.prod-details { flex: 1; margin-left: 15px; }
+
+.p-name { display: block; font-weight: 600; font-size: 15px; }
+
+.p-specs { display: flex; gap: 8px; margin-top: 4px; }
+
+.spec-tag {
+    font-size: 11px;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #555;
+}
+
+.prod-price { text-align: right; }
+
+.qty { font-size: 13px; color: #888; }
+
+.unit-price { font-weight: 700; font-size: 15px; }
+
+/* فوتر التفاصيل والسعر النهائي */
+.order-footer-new {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px dashed #eee;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.final-amount {
+    font-size: 24px;
+    font-weight: 800;
+    color: #000;
+}
+
+/* 9. نافذة تحديث الحالة (Status Popup) */
+.popup {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 350px;
+    text-align: center;
+}
+
+.popup h3 { margin-bottom: 20px; font-size: 18px; }
+
+.popup select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+.popup-buttons { display: flex; gap: 10px; justify-content: center; }
+
+.btn-confirm {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-cancel {
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* زر الإغلاق X */
+.close-btn {
+    background: #f5f5f5;
+    border: none;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.close-btn:hover { background: #000; color: #fff; }
+
+/* 10. أنيميشن */
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+/* تنسيق خاص لنافذة تأكيد الحذف */
+.delete-confirm-modal {
+    padding: 20px 0 !important;
+    overflow: hidden;
+}
+
+.delete-footer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+/* لضمان تناسق أزرار التأكيد داخل المودال */
+.delete-confirm-modal .btn-confirm:hover {
+    background: #333 !important;
+}
+
+.delete-confirm-modal .btn-cancel:hover {
+    background: #e0e0e0 !important;
+}
+
+/* تنسيق حاوية الجرس */
+.icon-btn {
+  position: relative;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #333;
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.3s ease;
+}
+
+.icon-btn:hover {
+  color: #000;
+}
+
+/* تنسيق فقاعة الإشعارات (الرقم) */
+.notification-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: #ff4d4d; /* أحمر عصري */
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border: 2px solid #fff; /* إطار أبيض لفصلها عن الجرس */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  
+  /* تأثير الدخول */
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* أنيميشن لظهور الرقم بشكل جميل */
+@keyframes popIn {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+/* إضافة تأثير نبض خفيف إذا كانت الرسائل غير مقروءة (اختياري) */
+.notification-dot::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #ff4d4d;
+  opacity: 0.4;
+  z-index: -1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.4; }
+  70% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+/* خلفية النافذة المنبثقة المعتمة */
+.messages-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; /* لضمان ظهورها فوق كل شيء */
+  backdrop-filter: blur(3px);
+}
+
+/* بطاقة النافذة (Modal Card) */
+.messages-modal-card {
+  background: white;
+  width: 500px;
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+/* رأس النافذة */
+.modal-header {
+  padding: 15px 20px;
+  background: #000;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 { margin: 0; font-size: 1.2rem; }
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* جسم النافذة */
+.modal-body {
+  padding: 15px;
+  overflow-y: auto;
+}
+
+/* تنسيق الرسالة */
+.msg-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.unread-item {
+  border-left: 4px solid #000;
+  padding-left: 10px;
+  background: #f9f9f9;
+}
+
+.msg-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.msg-text {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 5px 0;
+}
+
+.msg-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.email-text {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.mark-btn {
+  background: #000;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.no-messages {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 10px;
+    }
+    .search-box {
+        min-width: auto !important;
+        width: 100%;
+    }
+}/* --- تعديلات التجاوب مع الهاتف --- */
+@media (max-width: 768px) {
+    /* 1. إصلاح الهيدر والبحث */
+    .header { padding: 10px !important; }
+    .search-box { min-width: unset !important; width: 100% !important; }
+
+    /* 2. تحويل الجدول إلى بطاقات (Cards) */
+    .orders-table, .orders-table thead, .orders-table tbody, .orders-table th, .orders-table td, .orders-table tr {
+        display: block !important;
+        width: 100% !important;
+    }
+    .orders-table thead { display: none !important; }
+    .orders-table tr {
+        border: 1px solid #e5e5e5;
+        margin-bottom: 12px !important;
+        border-radius: 10px;
+        padding: 10px !important;
+        background: #fff;
+    }
+    .orders-table td {
+        display: flex !important;
+        justify-content: space-between;
+        padding: 6px 4px !important;
+        border-bottom: 1px solid #f9f9f9;
+        font-size: 12px !important;
+    }
+
+    /* 3. تصغير العناصر داخل الجدول */
+    .action-buttons { gap: 5px !important; }
+    .btn-update, .btn-delete { padding: 4px 8px !important; font-size: 11px !important; }
+
+    /* 4. تصغير نافذة التفاصيل (Details Modal) فقط */
+    .details-modal {
+        width: 90% !important;       /* تصغير العرض */
+        max-height: 75vh !important; /* تصغير الارتفاع */
+        margin: auto !important;
+    }
+    
+    /* 5. تنسيق عام للمحتوى */
+    .content { padding: 10px !important; }
+}

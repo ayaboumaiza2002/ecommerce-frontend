@@ -1,0 +1,32 @@
+<div class="login-page">
+  <div class="overlay"></div>
+  <div class="login-container">
+    <h1 class="title">Welcome Back!!</h1>
+    <div *ngIf="message" class="popup">
+  <div class="popup-content">
+    <p>{{ message }}</p>
+    <button (click)="message=''">Close</button>
+  </div>
+</div>
+
+    <form class="login-form" (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="Enter username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter password" required>
+      </div>
+
+      <!-- Forgot password link -->
+      <div class="forgot-password">
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+  </div>
+</div>
+

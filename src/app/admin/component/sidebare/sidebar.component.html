@@ -1,0 +1,33 @@
+<aside class="sidebar" #sidebar [class.active]="isMobileMenuOpen">
+  <div class="sidebar-header">
+    <h2 class="sidebar-title">
+      ROYELLA
+      <span class="brand-subtitle">brand</span>
+    </h2>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active">
+      <i class="fas fa-chart-line"></i>
+      <span>Dashboard</span>
+    </a>
+    <a class="nav-item" routerLink="/admin/products" routerLinkActive="active">
+      <i class="fas fa-box"></i>
+      <span>Products</span>
+    </a>
+    
+    <a class="nav-item" routerLink="/admin/orders" routerLinkActive="active">
+      <div class="nav-icon-wrapper">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="notification-badge" *ngIf="pendingCount > 0">
+          {{ pendingCount }}
+        </span>
+      </div>
+      <span>Orders</span>
+    </a>
+
+    <a class="nav-item" (click)="logout()" style="cursor: pointer;">
+      <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+    </a>
+  </nav>
+</aside>
