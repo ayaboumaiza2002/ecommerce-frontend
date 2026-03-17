@@ -176,13 +176,25 @@ export class ProductsComponent implements OnInit {
   }
 
   // منطق التحديث (Update)
-  openUpdateModal(product: any) { 
-    this.editProduct = { ...product }; 
-    // عرض الصور الموجودة أصلاً في السيرفر
-    this.updatePreviewImages = product.imageUrls ? product.imageUrls.map((url: string) => 'http://localhost:8081' + url) : []; 
-    this.updateSelectedFiles = []; 
-    this.showUpdateModal = true; 
+openUpdateModal(product: any) { 
+  // 1. أخذ نسخة من المنتج للتعديل
+  this.editProduct = { ...product }; 
+  
+  // 2. تحضير معاينة الصور باستعمال رابط Railway أونلاين
+  if (product.imageUrls && product.imageUrls.length > 0) {
+    this.updatePreviewImages = product.imageUrls.map((url: string) => 
+      'https://ecommerce-backend-production-3ebb.up.railway.app' + url
+    );
+  } else {
+    this.updatePreviewImages = [];
   }
+  
+  // 3. تصفير مصفوفة الملفات المختارة الجديدة
+  this.updateSelectedFiles = []; 
+  
+  // 4. فتح النافذة
+  this.showUpdateModal = true; 
+}
 
   onUpdateImagesSelected(event: any) {
     const files = event.target.files;

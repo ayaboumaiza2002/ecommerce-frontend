@@ -52,9 +52,9 @@
             <tr *ngFor="let produit of filteredProduits">
               <td>
                 <div class="product-info">
-                  <img *ngIf="produit.imageUrls && produit.imageUrls.length > 0" 
-                       [src]="'http://localhost:8081' + produit.imageUrls[0]" 
-                       alt="Product" class="product-img" />
+                 <img *ngIf="produit.imageUrls && produit.imageUrls.length > 0" 
+     [src]="'https://ecommerce-backend-production-3ebb.up.railway.app' + produit.imageUrls[0]" 
+     alt="Product" class="product-img" />
                   
                   <img *ngIf="!produit.imageUrls || produit.imageUrls.length === 0" 
                        src="assets/no-image.png" alt="No Image" class="product-img" />
