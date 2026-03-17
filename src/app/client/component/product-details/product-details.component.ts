@@ -15,7 +15,8 @@ import { CartService } from '../../../service/cart.service';
 export class ProductDetailsComponent implements OnInit {
   
   produit: any = null; // نضعه null في البداية
-  backendUrl = 'http://localhost:8081'; 
+ // بدلي هاد السطر بالضبط
+backendUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app';
   mainImageUrl: string = '';
 
   selectedSize: string = '';

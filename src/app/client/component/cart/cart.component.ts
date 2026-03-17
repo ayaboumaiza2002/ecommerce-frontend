@@ -13,7 +13,8 @@ import { CartService } from '../../../service/cart.service';
 export class CartComponent implements OnInit {
   items: any[] = [];
   total: number = 0;
-  backendUrl = 'http://localhost:8081';
+  // بدلي هاد السطر بالضبط
+backendUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app';
   cartCount: number = 0;
 
   constructor(private cartService: CartService) {}

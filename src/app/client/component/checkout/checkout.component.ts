@@ -15,7 +15,8 @@ import { ALGERIA_DATA, SHIPPING_FEES } from '../algeria-cities';
 export class CheckoutComponent implements OnInit {
   @ViewChild('orderForm') orderForm!: NgForm;
 
-  backendUrl = 'http://localhost:8081'; // الرابط الأساسي للصور
+ // بدلي هاد السطر بالضبط
+backendUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app'; // الرابط الأساسي للصور
   wilayas = Object.keys(ALGERIA_DATA);
   communesMapping = ALGERIA_DATA;
   filteredCommunes: string[] = [];
