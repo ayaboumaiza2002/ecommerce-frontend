@@ -109,9 +109,11 @@
           <h4>Order Summary</h4>
           <div class="items-scroll-area">
             <div class="order-item" *ngFor="let item of selectedCommande?.items">
-              <div class="prod-img-wrapper">
-                 <img [src]="'http://localhost:8081' + item.produit?.imageUrls[0]" class="prod-thumb">
-              </div>
+             <div class="prod-img-wrapper">
+   <img [src]="'https://ecommerce-backend-production-3ebb.up.railway.app' + item.produit?.imageUrls[0]" 
+        class="prod-thumb" 
+        alt="Product Image">
+</div>
               <div class="prod-details">
                 <span class="p-name">{{item.produit?.nom}}</span>
                 <div class="p-specs">
