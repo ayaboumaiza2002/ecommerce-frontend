@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
   newProducts: any[] = [];
   categories: string[] = [];
   categoryImages: { [key: string]: string } = {}; 
-  backendUrl = 'http://localhost:8081';
+  // بدلي هاد السطر بالضبط
+backendUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app';
   cartCount: number = 0;
   currentIndex: number = 0;
 
