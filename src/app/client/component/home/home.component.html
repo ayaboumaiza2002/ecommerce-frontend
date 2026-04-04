@@ -123,24 +123,12 @@
         <div class="row row-cols-1 row-cols-md-3 g-5 justify-content-center">
             <div class="col" *ngFor="let prod of newProducts; let i = index">
                 <a class="nouv-card-bg d-block text-decoration-none text-center text-dark">
-                    <div class="nouv-img" [style.background-image]="'url(' + getImgUrl(prod.imageUrls) + ')'">
-                         <span *ngIf="i < 3" class="badge bg-danger position-absolute m-2" style="left:0; top:0;">NEW</span>
-                         
-                         <span *ngIf="prod.prix_promo" class="badge bg-warning text-dark position-absolute m-2" style="right:0; top:0;">PROMO</span>
+                    <div class="nouv-img" 
+                         [style.background-image]="'url(' + getImgUrl(prod.imageUrls) + ')'">
+                         <span *ngIf="i < 3" class="badge bg-danger position-absolute m-2">NEW</span>
                     </div>
-
                     <h3 class="nouv-title mt-4">{{ prod.nom }}</h3>
-
-                    <p class="collection-price">
-                        <ng-container *ngIf="prod.prix_promo; else normalPrice">
-                            <span class="text-muted text-decoration-line-through me-2" style="font-size: 0.9em;">{{ prod.prix }} DZ</span>
-                            <span class="text-danger fw-bold">{{ prod.prix_promo }} DZ</span>
-                        </ng-container>
-                        <ng-template #normalPrice>
-                            {{ prod.prix }} DZ
-                        </ng-template>
-                    </p>
-
+                    <p class="collection-price">{{ prod.prix }} DZ</p>
                     <span class="shop-now-btn mt-3" [routerLink]="['/product', prod.id]">SHOP NOW →</span>
                 </a>
             </div>
