@@ -183,7 +183,7 @@ openUpdateModal(product: any) {
   // 2. تحضير معاينة الصور باستعمال رابط Railway أونلاين
   if (product.imageUrls && product.imageUrls.length > 0) {
     this.updatePreviewImages = product.imageUrls.map((url: string) => 
-      'https://ecommerce-backend-production-3ebb.up.railway.app' + url
+      'https://ecommerce-backend-production-f47b.up.railway.app' + url
     );
   } else {
     this.updatePreviewImages = [];
