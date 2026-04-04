@@ -21,7 +21,8 @@ export class ProductsComponent implements OnInit {
   produits: any[] = [];
   filteredProduits: any[] = [];
   searchTerm: string = '';
- private apiUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app/api/produits';
+ private apiUrl = 'https://ecommerce-backend-production-f47b.up.railway.app/api/produits';
+ 
 
   // متغيرات الرسائل
   showMessagesModal: boolean = false;
