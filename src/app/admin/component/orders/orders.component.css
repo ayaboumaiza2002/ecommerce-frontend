@@ -698,3 +698,20 @@ body {
     /* 5. تنسيق عام للمحتوى */
     .content { padding: 10px !important; }
 }
+/* تعديلات خاصة بالشاشات الصغيرة (الموبايل) */
+@media (max-width: 768px) {
+  .content-header h1 {
+    font-size: 24px; /* الحجم الأصلي يكون عادة 32px أو أكثر، هنا نصغره */
+    margin-bottom: 5px;
+  }
+
+  .content-header p {
+    font-size: 14px; /* تصغير النص الوصفي تحت العنوان */
+    color: #666;
+  }
+
+  .content-header {
+    padding: 15px 10px; /* تقليل المسافات المحيطة بالعنوان */
+    text-align: center; /* اختياري: إذا أردتِ توسيط العنوان في الموبايل */
+  }
+}
