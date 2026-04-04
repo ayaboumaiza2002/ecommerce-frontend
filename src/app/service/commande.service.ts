@@ -4,10 +4,10 @@ import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
-})
+}) 
 export class CommandeService {
-  private comUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app/api/commandes/total';
-private apiURL = 'https://ecommerce-backend-production-3ebb.up.railway.app/api/commandes';
+  private comUrl = 'https://ecommerce-backend-production-f47b.up.railway.app/api/commandes/total';
+private apiURL = 'https://ecommerce-backend-production-f47b.up.railway.app/api/commandes';
     constructor (private http : HttpClient){}
 
     getTotalCommandes(): Observable<number>{

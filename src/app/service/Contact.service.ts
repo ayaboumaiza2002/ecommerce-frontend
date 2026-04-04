@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ContactService {
   // استبدلي السطر 9 في ملفك بهذا الكود
-private apiUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app/api/contact';// تأكدي من نفس بورت الباك أند
+private apiUrl = 'https://ecommerce-backend-production-f47b.up.railway.app/api/contact';
 
   constructor(private http: HttpClient) {}
 

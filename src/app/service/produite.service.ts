@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 export class ProduiteService {
     // الرابط الأساسي
     // استبدلي السطر 10 في ملفك بهذا الكود
-private apiUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app/api/produits';
+private apiUrl = 'https://ecommerce-backend-production-f47b.up.railway.app/api/produits';
 
     constructor(private http: HttpClient) { }
 
