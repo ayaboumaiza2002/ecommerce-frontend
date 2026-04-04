@@ -11,7 +11,7 @@ const httpOptions = {
 })
 export class AdminLoginService {
 // استبدلي السطر 13 في ملفك بهذا الكود
-private apiURL = 'https://ecommerce-backend-production-3ebb.up.railway.app/api/admin/login';
+private apiURL = 'https://ecommerce-backend-production-f47b.up.railway.app/api/admin/login';
 
   constructor(private http: HttpClient) {}
 
