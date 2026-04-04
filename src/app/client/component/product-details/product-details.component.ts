@@ -16,7 +16,7 @@ export class ProductDetailsComponent implements OnInit {
   
   produit: any = null; // نضعه null في البداية
  // بدلي هاد السطر بالضبط
-backendUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app';
+backendUrl = 'https://ecommerce-backend-production-f47b.up.railway.app';
   mainImageUrl: string = '';
 
   selectedSize: string = '';

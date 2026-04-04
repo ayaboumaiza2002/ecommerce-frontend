@@ -16,7 +16,7 @@ export class CheckoutComponent implements OnInit {
   @ViewChild('orderForm') orderForm!: NgForm;
 
  // بدلي هاد السطر بالضبط
-backendUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app'; // الرابط الأساسي للصور
+backendUrl = 'https://ecommerce-backend-production-f47b.up.railway.app'; // الرابط الأساسي للصور
   wilayas = Object.keys(ALGERIA_DATA);
   communesMapping = ALGERIA_DATA;
   filteredCommunes: string[] = [];

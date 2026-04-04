@@ -14,7 +14,7 @@ export class ShopComponent {
 produits: any[] = [];
   // هذا الرابط لعرض الصور من الـ backend
   // بدلي هاد السطر بالضبط
-backendUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app';
+backendUrl = 'https://ecommerce-backend-production-f47b.up.railway.app';
   
 cartCount: number = 0;
   constructor(private produitService: ProduiteService ,private cartService: CartService) { }

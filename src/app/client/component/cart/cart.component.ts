@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
   items: any[] = [];
   total: number = 0;
   // بدلي هاد السطر بالضبط
-backendUrl = 'https://ecommerce-backend-production-3ebb.up.railway.app';
+backendUrl = 'https://ecommerce-backend-production-f47b.up.railway.app';
   cartCount: number = 0;
 
   constructor(private cartService: CartService) {}
